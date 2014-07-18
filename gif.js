@@ -9,3 +9,5 @@ function gif( res ) {
 	res.writeHead(200, {'Content-Type': 'image/gif' });
 	res.end(imgBinary, 'binary');
 }
+
+module.exports = gif;

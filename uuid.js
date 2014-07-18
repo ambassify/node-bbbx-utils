@@ -5,3 +5,5 @@ function uuid() {
 		return v.toString(16);
 	});
 }
+
+module.exports = uuid;
