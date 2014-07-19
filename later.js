@@ -1,5 +1,5 @@
 var q = require('q'),
-	_ = require('lodash-node');
+	_ = require('lodash');
 
 /**
  * Later wraps functions and exposes a promise API
