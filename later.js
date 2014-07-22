@@ -17,14 +17,8 @@ function later( fn ) {
 	var defer = q.defer(),
 		promise = defer.promise;
 
-	if( !fn ) {
-		fn = function(r) {
-			return r;
-		};
-	}
-
-	var f = function() {
-		defer.resolve(fn());
+	var f = function(r) {
+		defer.resolve( fn ? fn.apply(null,arguments) : r );
 	};
 
 	// Make a promise of f
