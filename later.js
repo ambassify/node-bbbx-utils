@@ -17,13 +17,14 @@ function later( fn ) {
 	var defer = q.defer(),
 		promise = defer.promise;
 
-	var f = function() {
-		defer.resolve(fn());
+	var f = function(r) {
+		defer.resolve( fn ? fn.apply(null,arguments) : r );
 	};
 
 	// Make a promise of f
 	_.forIn(promise,function(i, k){
-		f[k] = i.bind(promise);
+		if( _.isFunction(i) )
+			f[k] = i.bind(promise);
 	});
 
 	return f;
