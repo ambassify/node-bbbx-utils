@@ -6,10 +6,10 @@ var q = require('q'),
  * powered by Q.
  *
  * As soon as the callback returns the promise is resolved,
- * this allows you to create a callback and pass it on 
+ * this allows you to create a callback and pass it on
  * futher down the live without having to worry about
  * resolving it.
- * 
+ *
  * @param  {Function} fn
  * @return {Promise}
  */
@@ -18,7 +18,11 @@ function later( fn ) {
 		promise = defer.promise;
 
 	var f = function(r) {
-		defer.resolve( fn ? fn.apply(null,arguments) : r );
+		try {
+			defer.resolve( fn ? fn.apply(null,arguments) : r );
+		} catch( err ) {
+			defer.reject( err );
+		}
 	};
 
 	// Make a promise of f
